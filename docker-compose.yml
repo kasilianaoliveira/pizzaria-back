@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres-pizzaria
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 28031970
+      POSTGRES_DB: pizzaria
+    volumes:
+      - ./data:/data/postgres
+    ports:
+      - "5432:5432"
