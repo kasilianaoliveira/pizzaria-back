@@ -1,9 +1,18 @@
-import { Router, Request, Response } from 'express'
+import { Router   } from 'express'
+import { CreateUserController } from './controllers/user/CreateUserController';
+import { AuthUserControler } from './controllers/user/AuthUserController';
+import { isAuthenticated } from './middlewares/isAuthenticated';
+import { DetailUserController } from './controllers/user/DetailUserController';
 
 
 export const router = Router();
 
+//LOGIN
+router.post('/session', new AuthUserControler().handle);
 
-router.get('/test', (req:Request, res: Response) => {
-  throw new Error('Erro ao fazer essa requisição')
-})
+//USERS
+router.post('/users', new CreateUserController().handle);
+
+router.get('/me',isAuthenticated, new DetailUserController().handle);
+
+
